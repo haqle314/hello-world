@@ -1,0 +1,38 @@
+doctype html
+html(lang="en")
+    head
+        title Survey question
+        link(rel='stylesheet' href='/assets/question.css')
+    body
+        h1 Survey question
+        -
+            const next = id+1;
+            const prev = id-1;
+            const first = id === 1;
+            const last = id === total;
+            const action = last ? '/summary' : `/question/${next}`;
+            const submitButton = last ? 'Submit' : 'Confirm';
+        form(method='GET' action=action)
+            fieldset
+                legend Question #{id}
+                =question
+
+            each answer, index in answers
+                label
+                    input(type='checkbox' name=index)
+                    =answer
+                br
+            fieldset.buttons
+                a(href=`/question/${next}`)
+                    input(type='button' value='Skip' href='/')
+                input(type='submit' value=submitButton)
+
+        .nav
+            button(style={visibility: first ? 'hidden' : 'visible'})
+                a(href=prev) <
+            - let n = 0;
+            while n++ < total
+                button
+                    a(href=n class=`${n === id ? "current" : ""}`): =n
+            button(style={visibility: last ? 'hidden' : 'visible'})
+                a(href=next) >

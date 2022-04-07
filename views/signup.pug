@@ -1,0 +1,15 @@
+doctype html
+html(lang="en")
+    head
+        title Sign Up
+    body
+        form(method='POST')
+            label Username&nbsp;
+                input(type='text' name='username' required)
+            br
+            label Password&nbsp;
+                input(type='password' name='password' required)
+            br
+            label Repeat password
+                input(type='password' name='password-repeat' required)
+            input(type='submit' value='Sign up')

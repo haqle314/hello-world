@@ -1,0 +1,8 @@
+.env
+
+TODOs.txt
+requirements.txt
+
+node_modules/*
+dist/*
+.idea/
