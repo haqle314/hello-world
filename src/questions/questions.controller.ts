@@ -1,13 +1,4 @@
-import {
-  Controller,
-  Get,
-  Param,
-  Render,
-  Session,
-  Query,
-  Headers,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Get, Param, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { QuestionsService } from './questions.service';
 
