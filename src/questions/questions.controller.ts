@@ -1,8 +1,16 @@
-import { Controller, Get, Param, UseGuards } from '@nestjs/common';
+import {
+  CacheInterceptor,
+  Controller,
+  Get,
+  Param,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { QuestionsService } from './questions.service';
 
 @Controller('question')
+@UseInterceptors(CacheInterceptor)
 export class QuestionsController {
   constructor(private questionsService: QuestionsService) {}
 
