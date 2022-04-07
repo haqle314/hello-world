@@ -14,4 +14,8 @@ export class User extends Model {
 
   @Column(DataType.STRING(60))
   hash: string;
+
+  // list of jti in issued refresh_tokens
+  @Column(DataType.ARRAY(DataType.STRING))
+  refresh_tokens: string[];
 }

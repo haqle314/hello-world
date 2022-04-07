@@ -13,6 +13,28 @@ export class UsersService {
       where: { username },
     });
   }
+
+  async registerRefreshToken(username: string, jti: string) {
+    const user = await this.userModel.findOne({
+      raw: true,
+      attributes: ['refresh_tokens'],
+      where: { username },
+    });
+    const refresh_tokens = user?.refresh_tokens ?? [];
+    refresh_tokens?.push(jti);
+    return this.userModel.update({ refresh_tokens }, { where: { username } });
+  }
+
+  async validateRefreshToken(username: string, jti: string) {
+    const { refresh_tokens } =
+      (await this.userModel.findOne({
+        raw: true,
+        attributes: ['refresh_tokens'],
+        where: { username },
+      })) || {};
+    return refresh_tokens?.includes(jti);
+  }
+
   async signUp(username: string, password: string) {
     if (await this.getUser(username)) {
       throw new HttpException(
